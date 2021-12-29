@@ -2,8 +2,6 @@ FROM python:3.10.0-alpine3.15
 
 WORKDIR /app
 
-COPY requirements.txt /app
-
 RUN apk add --no-cache ansible py3-psycopg2 py3-jmespath
 
 RUN mkdir -p /.ansible/tmp && chown -R 65534:65534 /.ansible
