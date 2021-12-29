@@ -1,0 +1,22 @@
+localhost:
+  hosts:
+    local:
+  vars:
+    ansible_python_interpreter: /usr/local/bin/python3
+    server:
+      host: "host"
+      port: "5432"
+      user: "postgres"
+      password: "pass1234"
+      database: "postgres"
+    extensions:
+      - name: uuid-ossp
+        state: present
+    databases:
+      - databaseUrl: postgres://user:pass123@host:5432/database
+      - databaseUrl: postgresql://user:pass123@host:5432/database
+        state: absent
+      - databaseUrl: postgresql://user:pass123@host:5432/database
+        state: present
+      - databaseUrl: postgres://user:pass123@host:5432/database
+        locale: C

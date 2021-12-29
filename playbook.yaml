@@ -1,0 +1,62 @@
+- name: Run
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Manage PostgreSQL extensions
+      community.postgresql.postgresql_ext:
+        name: "{{ item.name }}"
+        state: '{{ item.state | default("present", true) }}'
+
+        db: "{{ server.database }}"
+        login_host: "{{ server.host }}"
+        login_port: "{{ server.port }}"
+        login_user: "{{ server.user }}"
+        login_password: "{{ server.password }}"
+      loop: '{{ extensions }}'
+
+    - name: Manage PostgreSQL databases
+      community.postgresql.postgresql_db:
+        name: "{{ item.url.split('@')[1].split('/')[1] }}"
+        state: '{{ item.state | default("present", true) }}'
+
+        lc_collate: "{{ item.locale | default('en_US.UTF-8', true) }}"
+        lc_ctype: "{{ item.locale | default('en_US.UTF-8', true) }}"
+        encoding: UTF8
+        template: template0
+
+        maintenance_db: "{{ server.database }}"
+        login_host: "{{ server.host }}"
+        login_port: "{{ server.port }}"
+        login_user: "{{ server.user }}"
+        login_password: "{{ server.password }}"
+      loop: '{{ databases|json_query("[].{url: databaseUrl, locale: locale, state: state}")|selectattr("url", "match", "^(postgres|postgresql):\/\/.*") | list }}'
+
+    - name: Manage PostgreSQL users
+      community.postgresql.postgresql_user:
+        name: "{{ item.url.split('://')[1].split('@')[0].split(':')[0] }}"
+        password: "{{ item.url.split('://')[1].split('@')[0].split(':')[1] }}"
+        state: '{{ item.state | default("present", true) }}'
+
+        login_db: "{{ server.database }}"
+        login_host: "{{ server.host }}"
+        login_port: "{{ server.port }}"
+        login_user: "{{ server.user }}"
+        login_password: "{{ server.password }}"
+      loop: '{{ databases|json_query("[].{url: databaseUrl, locale: locale, state: state}")|selectattr("url", "match", "^(postgres|postgresql):\/\/.*") | list }}'
+
+    - name: Manage PostgreSQL grants
+      community.postgresql.postgresql_privs:
+        privs: ALL
+        type: database
+        fail_on_role: no
+        obj: "{{ item.url.split('@')[1].split('/')[1] }}"
+        role: "{{ item.url.split('://')[1].split('@')[0].split(':')[0] }}"
+        state: '{{ item.state | default("present", true) }}'
+
+        login_db: "{{ server.database }}"
+        login_host: "{{ server.host }}"
+        login_port: "{{ server.port }}"
+        login_user: "{{ server.user }}"
+        login_password: "{{ server.password }}"
+      loop: '{{ databases|json_query("[].{url: databaseUrl, locale: locale, state: state}")|selectattr("url", "match", "^(postgres|postgresql):\/\/.*") | list }}'
