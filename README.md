@@ -18,7 +18,7 @@ localhost:
   hosts:
     local:
   vars:
-    ansible_python_interpreter: /usr/local/bin/python3
+    ansible_python_interpreter: /usr/bin/python3
     server:
       host: "host"
       port: "5432"
