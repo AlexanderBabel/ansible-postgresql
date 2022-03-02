@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/AlexanderBabel/ansible-postgresql/compare/v1.0.1...v1.0.2) (2022-03-02)
+
+
+### Bug Fixes
+
+* **deps:** update python docker tag to v3.10.2 ([3352aed](https://github.com/AlexanderBabel/ansible-postgresql/commit/3352aed4f3fcb5460ebacd389edf878165197959))
+
 ## [1.0.1](https://github.com/AlexanderBabel/ansible-postgresql/compare/v1.0.0...v1.0.1) (2021-12-29)
 
 
