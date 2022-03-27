@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/AlexanderBabel/ansible-postgresql/compare/v1.0.2...v1.0.3) (2022-03-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency python to v3.10.4 ([afe28e9](https://github.com/AlexanderBabel/ansible-postgresql/commit/afe28e9de38d62db17b0409ff0b075e91ec36b28))
+
 ## [1.0.2](https://github.com/AlexanderBabel/ansible-postgresql/compare/v1.0.1...v1.0.2) (2022-03-02)
 
 
