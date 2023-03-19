@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/AlexanderBabel/ansible-postgresql/compare/v1.1.0...v1.1.1) (2023-03-19)
+
+
+### Bug Fixes
+
+* **playbook:** use correct database to update schema ([733eddd](https://github.com/AlexanderBabel/ansible-postgresql/commit/733edddca1097c0908482f050a2185319e838662))
+
 # [1.1.0](https://github.com/AlexanderBabel/ansible-postgresql/compare/v1.0.3...v1.1.0) (2023-03-19)
 
 
