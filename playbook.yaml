@@ -60,3 +60,19 @@
         login_user: "{{ server.user }}"
         login_password: "{{ server.password }}"
       loop: '{{ databases|json_query("[].{url: databaseUrl, locale: locale, state: state}")|selectattr("url", "match", "^(postgres|postgresql):\/\/.*") | list }}'
+
+    - name: Manage PostgreSQL grants on public schema
+      community.postgresql.postgresql_privs:
+        privs: ALL
+        type: schema
+        fail_on_role: no
+        obj: "public"
+        role: "{{ item.url.split('://')[1].split('@')[0].split(':')[0] }}"
+        state: '{{ item.state | default("present", true) }}'
+
+        login_db: "{{ server.database }}"
+        login_host: "{{ server.host }}"
+        login_port: "{{ server.port }}"
+        login_user: "{{ server.user }}"
+        login_password: "{{ server.password }}"
+      loop: '{{ databases|json_query("[].{url: databaseUrl, locale: locale, state: state}")|selectattr("url", "match", "^(postgres|postgresql):\/\/.*") | list }}'
