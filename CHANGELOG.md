@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/AlexanderBabel/ansible-postgresql/compare/v1.0.3...v1.1.0) (2023-03-19)
+
+
+### Features
+
+* **playbook:** also grant access to public schema ([1a623d5](https://github.com/AlexanderBabel/ansible-postgresql/commit/1a623d50e4ed01c642ce0e51a1056ee688ab1178))
+
 ## [1.0.3](https://github.com/AlexanderBabel/ansible-postgresql/compare/v1.0.2...v1.0.3) (2022-03-27)
 
 
