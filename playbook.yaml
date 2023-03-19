@@ -67,10 +67,10 @@
         type: schema
         fail_on_role: no
         obj: "public"
+        database: "{{ item.url.split('@')[1].split('/')[1] }}"
         role: "{{ item.url.split('://')[1].split('@')[0].split(':')[0] }}"
         state: '{{ item.state | default("present", true) }}'
 
-        login_db: "{{ server.database }}"
         login_host: "{{ server.host }}"
         login_port: "{{ server.port }}"
         login_user: "{{ server.user }}"
